@@ -81,3 +81,15 @@ def extract_file_meta(rom, dirid = None, fileid = None, base = 0xBBDE8):
     rom.seek(last, 0)
 
     return result
+
+def extract_file_data(rom, inode):
+    """Given an inode, extract file contents from the ROM."""
+    
+    last = rom.tell()
+    
+    rom.seek(inode.base)
+    data = rom.read(inode.length)
+    
+    rom.seek(last, 0)
+    
+    return data
